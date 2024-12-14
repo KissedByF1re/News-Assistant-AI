@@ -1,12 +1,10 @@
-from pathlib import Path
 from datetime import datetime
 import json
 import re
 
 
-
-input_file_path = "../data/raw/mash_news.json"
-output_file_path = "../data/cleaned/mash_news_cleaned.json"
+input_file_path = "../data/raw/ria_news.json"
+output_file_path = "../data/cleaned/ria_news_cleaned.json"
 
 
 def clean_text(text):
