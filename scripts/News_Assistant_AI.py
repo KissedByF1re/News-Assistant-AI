@@ -39,27 +39,27 @@ button_clicked = st.button("Поиск")
 # Логика обработки запроса (реагирует на Enter или нажатие кнопки "Поиск")
 if query and (button_clicked or st.session_state.get("last_query") != query):
     st.session_state["last_query"] = query  # Сохраняем последний введённый запрос
-    pdb.set_trace()
-    # texts = refresh_index(pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\raw\combined_news.json").as_posix())
-    path_to_faiss = pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
+    # pdb.set_trace()
+    # texts = refresh_index(pathlib.Path(r"C:\Users\vallo\Documents\Projects\News-Assistant-AI\data\cleaned\combined_news.json").as_posix())
+    path_to_faiss = pathlib.Path(r"C:\Users\vallo\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
     faiss_retriever = set_faiss(path_to_faiss=path_to_faiss)
     graph = compile_graph()
-    pdb.set_trace()
+    # pdb.set_trace()
     result = graph.invoke({"messages": [{"role": "user", "content": query}]})
-    pdb.set_trace()
-    answer = result["messages"][-1].content
-#     for step in graph.stream(
-#         {"messages": [{"role": "user", "content": query}]},
-#         stream_mode="values",
-#     ):
-#         pass
+    # pdb.set_trace()
+    # answer = result["messages"][-1].content
+    # for step in graph.stream(
+    #     {"messages": [{"role": "user", "content": query}]},
+    #     stream_mode="values",
+    # ):
+    #     pass
 #     answer = step["messages"][-1].content
 #     # links = [link.metadata["link"] for link in step["context"]]
 #     #Здесь должна быть обработка запрос + поиск в FAISS
 
 #     # Отображение результатов
     st.subheader("Результаты поиска:")
-    st.write(answer)
+    st.write(result)
 
 #     st.subheader("Источники:")
 #     st.write("www")
@@ -97,9 +97,11 @@ st.markdown(
 )
 
 if __name__ == "__main__":
-    texts = refresh_index(pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\raw\combined_news.json").as_posix())
+    # aa = os.getcwd()
+    # print()
+    # texts = refresh_index(pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\raw\combined_news.json").as_posix())
     path_to_faiss = pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
-    faiss_retriever = set_faiss(path_to_faiss=path_to_faiss)
+    faiss_retriever = set_faiss()
     graph = compile_graph()
     result = graph.invoke({"messages": [{"role": "user", "content": query}]})
     answer = result["messages"][-1].content

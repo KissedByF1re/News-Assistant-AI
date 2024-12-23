@@ -4,7 +4,7 @@ from typing import List
 import pathlib
 
 from pathlib import Path
-from IPython.display import Image, display
+# from IPython.display import Image, display
 
 from langchain_community.document_loaders import JSONLoader
 from langchain_community.vectorstores import FAISS
@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv(".env")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("GPT_TOKEN")
 
 global llm
 llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)    
