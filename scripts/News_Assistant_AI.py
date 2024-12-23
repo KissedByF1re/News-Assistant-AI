@@ -1,16 +1,13 @@
 import streamlit as st
 from dotenv import load_dotenv
 import os
+import pdb
 
 from rag import *
 
-
-# Подгружаем API-ключ для GPT
-set_env_file()
-
 # Подгружаем данные и FAISS-индекс
-INDEX_PATH = "data/cleaned/news_faiss_openai.index"
-METADATA_PATH = "data/cleaned/combined_news.json"
+# INDEX_PATH = "data/cleaned/news_faiss_openai.index"
+# METADATA_PATH = "data/cleaned/combined_news.json"
 
 # Вводная информация о проекте
 st.markdown(
@@ -42,19 +39,34 @@ button_clicked = st.button("Поиск")
 # Логика обработки запроса (реагирует на Enter или нажатие кнопки "Поиск")
 if query and (button_clicked or st.session_state.get("last_query") != query):
     st.session_state["last_query"] = query  # Сохраняем последний введённый запрос
-    faiss_retriever = set_faiss()
-    llm = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
-    
-    #Здесь должна быть обработка запрос + поиск в FAISS
+    pdb.set_trace()
+    # texts = refresh_index(pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\raw\combined_news.json").as_posix())
+    path_to_faiss = pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
+    faiss_retriever = set_faiss(path_to_faiss=path_to_faiss)
+    graph = compile_graph()
+    pdb.set_trace()
+    result = graph.invoke({"messages": [{"role": "user", "content": query}]})
+    pdb.set_trace()
+    answer = result["messages"][-1].content
+#     for step in graph.stream(
+#         {"messages": [{"role": "user", "content": query}]},
+#         stream_mode="values",
+#     ):
+#         pass
+#     answer = step["messages"][-1].content
+#     # links = [link.metadata["link"] for link in step["context"]]
+#     #Здесь должна быть обработка запрос + поиск в FAISS
 
-    # Отображение результатов
+#     # Отображение результатов
     st.subheader("Результаты поиска:")
-    st.write(query)
+    st.write(answer)
 
-    st.subheader("Источники:")
-    st.write("Список источников")
-else:
-    st.error("Пожалуйста, введите запрос!")
+#     st.subheader("Источники:")
+#     st.write("www")
+#     # for link in links:
+#     #     st.write(link)
+# else:
+#     st.error("Пожалуйста, введите запрос!")
 
 
 # Добавление секции "Контакты"
@@ -83,3 +95,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+if __name__ == "__main__":
+    texts = refresh_index(pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\raw\combined_news.json").as_posix())
+    path_to_faiss = pathlib.Path(r"C:\Users\R1\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
+    faiss_retriever = set_faiss(path_to_faiss=path_to_faiss)
+    graph = compile_graph()
+    result = graph.invoke({"messages": [{"role": "user", "content": query}]})
+    answer = result["messages"][-1].content
