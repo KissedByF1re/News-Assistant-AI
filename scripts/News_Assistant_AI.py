@@ -2,10 +2,11 @@ import streamlit as st
 from dotenv import load_dotenv
 import os
 
+from rag import *
+
 
 # Подгружаем API-ключ для GPT
-load_dotenv(".env")
-OPENAI_API_KEY = os.getenv("GPT_TOKEN")
+set_env_file()
 
 # Подгружаем данные и FAISS-индекс
 INDEX_PATH = "data/cleaned/news_faiss_openai.index"
@@ -41,12 +42,14 @@ button_clicked = st.button("Поиск")
 # Логика обработки запроса (реагирует на Enter или нажатие кнопки "Поиск")
 if query and (button_clicked or st.session_state.get("last_query") != query):
     st.session_state["last_query"] = query  # Сохраняем последний введённый запрос
-
+    faiss_retriever = set_faiss()
+    llm = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+    
     #Здесь должна быть обработка запрос + поиск в FAISS
 
     # Отображение результатов
     st.subheader("Результаты поиска:")
-    st.write("Ответ LLM")
+    st.write(query)
 
     st.subheader("Источники:")
     st.write("Список источников")
