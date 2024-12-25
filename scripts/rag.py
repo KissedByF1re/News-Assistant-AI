@@ -2,6 +2,7 @@ import json
 import os
 from typing import List
 import pathlib
+import getpass
 
 from pathlib import Path
 # from IPython.display import Image, display
@@ -23,8 +24,9 @@ from langchain_core.tools import tool
 from dotenv import load_dotenv
 
 
-load_dotenv(".env")
-OPENAI_API_KEY = os.getenv("GPT_TOKEN")
+load_dotenv("../.env")
+if not os.environ.get("OPENAI_API_KEY"):
+  os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
 
 global llm
 llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)    
