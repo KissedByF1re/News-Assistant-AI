@@ -18,11 +18,19 @@
 ## Структура проекта
 ```plaintext
 .
-├── data/                     # Скачанные данные (JSON)
 ├── notebooks/                # Jupyter Notebooks для анализа и тестов
 ├── scripts/                  # Основные скрипты проекта
 │   ├── parcing_data.py       # Скрипт для парсинга данных из Telegram-канала
-├── venv/                     # Виртуальное окружение Python
 ├── requirements.txt          # Зависимости Python
 ├── LICENSE                   # Лицензия
 └── README.md                 # Описание проекта
+```
+
+## Установка зависимостей
+```bash
+pip install -r requirements.txt
+```
+## Запускаем проект из директории со скриптом
+```bash
+streamlit run News_Assistant_AI.py
+```
