@@ -12,15 +12,32 @@
   - Скачанные сообщения сохраняются в формате JSON.
   - Данные структурированы для удобной интеграции с RAG-системой.
 
-- **Интеграция с RAG:**
-  - Набор данных может быть использован для построения индекса (например, с использованием FAISS, LangChain или LlamaIndex).
+- **Построение RAG:**
+  - Набор данных использован для построения индекса с использованием FAISS
+  - В качестве LLM модели использовался ChatGPT (4o-mini)
+
+- **Оценка работы сервиса:** 
+  - Таблица с проверочными вопросами доступна по [ссылке](https://docs.google.com/spreadsheets/d/1M4PAOxSmMsAqZOXbxrQge-SqjCcrYNreGDisKOfUZQE/edit?usp=sharing)
+  - Запись с демонстрацией работы сервиса доступна по ссылке
+
+
+## Ограничения
+- Сервис работает только с использованием API-ключа для ChatGPT и VPN
+- На данный момент не настроено автоматическое обновление новостей (новые данные подгружаются самостоятельно)
 
 ## Структура проекта
 ```plaintext
 .
-├── notebooks/                # Jupyter Notebooks для анализа и тестов
+├── notebooks/                    # Jupyter Notebooks для анализа и тестов
+│   ├── async_parser.ipynb        # Ноутбук с проверкой возможности скачки новостей с помощью библиотеки Telethon
+│   ├── Combine_data.ipynb        # Объединение JSON-файлов с новостями из разных каналов
+│   ├── Create_FAISS_index.ipynb  # Первый эксперимент по созданию эмбеддингов и индекса
+│   ├── TelegramNewsNinja.ipynb   # Черновая версия RAG-системы для тестирования
 ├── scripts/                  # Основные скрипты проекта
-│   ├── parcing_data.py       # Скрипт для парсинга данных из Telegram-канала
+│   ├── data_parser.py        # Скрипт для парсинга данных из Telegram-канала
+│   ├── clean_data.py         # Скрипт с набором функций, для очистки и форматированая данных
+│   ├── rag.py                # скрипт RAG
+│   ├── News_Assistant_AI.py  # Frontend-проекта, интегрированный с Backend (rag.py)
 ├── requirements.txt          # Зависимости Python
 ├── LICENSE                   # Лицензия
 └── README.md                 # Описание проекта
@@ -30,7 +47,9 @@
 ```bash
 pip install -r requirements.txt
 ```
+
 ## Запускаем проект из директории со скриптом
 ```bash
-streamlit run News_Assistant_AI.py
+cd scripts 
+streamlit run .\News_Assistant_AI.py
 ```
