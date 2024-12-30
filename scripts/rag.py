@@ -96,7 +96,7 @@ def set_faiss(faiss_path: str="../data/index/faiss_index",
     Raises:
         AssertionError: Если не указан путь для индекса FAISS или отсутствуют тексты при создании нового индекса.
     """
-
+    load_dotenv("../.env")
     embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
     path_to_faiss = pathlib.Path(faiss_path).as_posix()
     is_indexed = os.path.isdir(path_to_faiss)
@@ -179,7 +179,7 @@ def retrieve(state: State):
     Returns:
         dict: Словарь с ключом "context", содержащий список релевантных документов.
     """
-    faiss_path = pathlib.Path(r"C:\Users\vallo\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
+    faiss_path = pathlib.Path(r"../data/index/faiss_index").as_posix()
     faiss_retriever = initialize_components(faiss_path=faiss_path, 
                                             json_file_path=None, 
                                             openai_key="", 
@@ -200,6 +200,7 @@ def generate(state: State):
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
     custom_rag_prompt = set_prompt(PROMPT_TEMPLATE)
     messages = custom_rag_prompt.invoke({"question": state["question"], "context": docs_content})
+    load_dotenv("../.env")
     api_key = os.getenv("OPENAI_API_KEY")
     llm = initialize_components(faiss_path=None,
                                 json_file_path=None,
