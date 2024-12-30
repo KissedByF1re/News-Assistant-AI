@@ -18,7 +18,7 @@
 
 - **Оценка работы сервиса:** 
   - Таблица с проверочными вопросами доступна по [ссылке](https://docs.google.com/spreadsheets/d/1M4PAOxSmMsAqZOXbxrQge-SqjCcrYNreGDisKOfUZQE/edit?usp=sharing)
-  - Запись с демонстрацией работы сервиса доступна по ссылке
+  - Запись с демонстрацией работы сервиса доступна по [ссылке](https://drive.google.com/file/d/1KBfNuyDmX1wVZPR_TIIz0GqlAscP-cBS/view?usp=sharing)
 
 
 ## Ограничения
