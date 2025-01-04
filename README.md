@@ -5,7 +5,7 @@
 
 ## Функциональность
 - **Сбор данных из Telegram-каналов:**
-  - Используется Selenium и BeautifulSoup для парсинга сообщений с веб-версии Telegram.
+  - Используется [Selenium](https://www.selenium.dev/documentation/) и [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc.ru/bs4ru.html) для парсинга сообщений с веб-версии Telegram.
   - Поддерживается извлечение текста, даты и времени из сообщений.
 
 - **Создание набора данных:**
@@ -13,8 +13,9 @@
   - Данные структурированы для удобной интеграции с RAG-системой.
 
 - **Построение RAG:**
-  - Набор данных использован для построения индекса с использованием FAISS
-  - В качестве LLM модели использовался ChatGPT (4o-mini)
+  - Для создания эмбеддингов используется [OpenAIEmbeddings](https://python.langchain.com/docs/integrations/text_embedding/openai/)
+  - Для построения индекса и поиска релевантных новостей применяется [Faiss](https://github.com/facebookresearch/faiss)
+  - В качестве LLM модели используется ChatGPT (4o-mini)
 
 - **Оценка работы сервиса:** 
   - Таблица с проверочными вопросами доступна по [ссылке](https://docs.google.com/spreadsheets/d/1M4PAOxSmMsAqZOXbxrQge-SqjCcrYNreGDisKOfUZQE/edit?usp=sharing)
@@ -43,6 +44,12 @@
 └── README.md                 # Описание проекта
 ```
 
+## Клонируем репозиторий
+```bash
+git clone https://github.com/KissedByF1re/News-Assistant-AI
+cd News-Assistant-AI/scripts
+```
+
 ## Установка зависимостей
 ```bash
 pip install -r requirements.txt
@@ -50,6 +57,10 @@ pip install -r requirements.txt
 
 ## Запускаем проект из директории со скриптом
 ```bash
-cd scripts 
 streamlit run .\News_Assistant_AI.py
 ```
+
+## Авторы проекта
+Михаил Макаров - сборка RAG-системы, интеграция с фронтом
+
+Розанов Константин - создание парсера, сбор данных, создания фронта
