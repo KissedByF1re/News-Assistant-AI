@@ -20,6 +20,7 @@
 - **Оценка работы сервиса:** 
   - Таблица с проверочными вопросами доступна по [ссылке](https://docs.google.com/spreadsheets/d/1M4PAOxSmMsAqZOXbxrQge-SqjCcrYNreGDisKOfUZQE/edit?usp=sharing)
   - Запись с демонстрацией работы сервиса доступна по [ссылке](https://drive.google.com/file/d/1KBfNuyDmX1wVZPR_TIIz0GqlAscP-cBS/view?usp=sharing)
+  - Для peer-rewiev предоставим временную ссылку ([автор 1](https://t.medatanalist), [автор 2](https://t.me/kbf02))
 
 
 ## Ограничения
