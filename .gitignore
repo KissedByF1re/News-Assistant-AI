@@ -122,8 +122,12 @@ __pypackages__/
 celerybeat-schedule
 celerybeat.pid
 
+docker/index
+
 # SageMath parsed files
 *.sage.py
+
+docker/index/faiss_index/
 
 # Environments
 .env
