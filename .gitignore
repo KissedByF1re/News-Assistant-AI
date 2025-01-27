@@ -1,3 +1,7 @@
+# Custom
+data/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -118,8 +122,12 @@ __pypackages__/
 celerybeat-schedule
 celerybeat.pid
 
+docker/index
+
 # SageMath parsed files
 *.sage.py
+
+docker/index/faiss_index/
 
 # Environments
 .env

@@ -51,9 +51,9 @@ st.markdown(
     <div style='text-align: center; margin-top: 50px;'>
         <h3>Контакты</h3>
         <p>
-            <a href='https://github.com/KissedByF1re' style='font-size: 16px; margin: 0 10px;' target='_blank'>Константин Розанов 1</a>
+            <a href='https://github.com/KissedByF1re' style='font-size: 16px; margin: 0 10px;' target='_blank'>Developer 1</a>
             |
-            <a href='https://github.com/datanalist' style='font-size: 16px; margin: 0 10px;' target='_blank'>Михаил Макаров 2</a>
+            <a href='https://github.com/datanalist' style='font-size: 16px; margin: 0 10px;' target='_blank'>Developer 2</a>
             |
             <a href='https://github.com/KissedByF1re/News-Assistant-AI' style='font-size: 16px; margin: 0 10px;' target='_blank'>GitHub проекта</a>
         </p>

@@ -22,12 +22,12 @@ class State(TypedDict):
     context: List[Document]
     answer: str
 
-def load_api_env(env_file: str="../.env"):
+def load_api_env(env_file: str=".env"):
     """
     Загружает переменные окружения из файла .env.
 
     Args:
-        env_file (str): Путь к файлу .env. По умолчанию "../.env"
+        env_file (str): Путь к файлу .env. По умолчанию ".env"
 
     Returns:
         None
@@ -81,14 +81,14 @@ def prepare_data(json_file_path: str) -> List[Document]:
     texts = text_splitter.split_documents(data)
     return texts
 
-def set_faiss(faiss_path: str="../data/index/faiss_index",
-              json_file_path: Optional[str]="../data/cleaned/combined_news.json") -> FAISS:
+def set_faiss(faiss_path: str="index/faiss_index",
+              json_file_path: Optional[str]="combined_news.json") -> FAISS:
     """
     Создает или загружает индекс FAISS для векторного поиска.
 
     Args:
-        faiss_path (str): Путь для сохранения/загрузки индекса FAISS. По умолчанию "../data/index/faiss_index"
-        json_file_path (Optional[str]): Путь к JSON файлу с данными. По умолчанию "../data/cleaned/combined_news.json"
+        faiss_path (str): Путь для сохранения/загрузки индекса FAISS. По умолчанию "index/faiss_index"
+        json_file_path (Optional[str]): Путь к JSON файлу с данными. По умолчанию "combined_news.json"
 
     Returns:
         FAISS: Объект векторного хранилища FAISS с загруженными эмбеддингами документов.
@@ -96,13 +96,13 @@ def set_faiss(faiss_path: str="../data/index/faiss_index",
     Raises:
         AssertionError: Если не указан путь для индекса FAISS или отсутствуют тексты при создании нового индекса.
     """
-
+    load_api_env(".env")
     embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
     path_to_faiss = pathlib.Path(faiss_path).as_posix()
     is_indexed = os.path.isdir(path_to_faiss)
     if not is_indexed:
         assert isinstance(faiss_path, (str, pathlib.Path)), "Путь к индексу FAISS должен быть строкой или объектом Path"
-        assert json_file_path is not None, "Необходимо указать путь к JSON файлу с данными"
+        assert json_file_path is None, "Необходимо указать путь к JSON файлу с данными"
         texts = prepare_data(json_file_path)
         assert texts, "Не удалось загрузить тексты из JSON файла"
         faiss_store = FAISS.from_documents(texts, embeddings)
@@ -179,11 +179,11 @@ def retrieve(state: State):
     Returns:
         dict: Словарь с ключом "context", содержащий список релевантных документов.
     """
-    faiss_path = pathlib.Path(r"C:\Users\vallo\Documents\Projects\News-Assistant-AI\data\index\faiss_index").as_posix()
+    faiss_path = pathlib.Path("index/faiss_index").as_posix()
     faiss_retriever = initialize_components(faiss_path=faiss_path, 
                                             json_file_path=None, 
                                             openai_key="", 
-                                            components=["faiss_retriever"])[0]
+                                            components=["faiss_retriever"])[0]  
     retrieved_docs = faiss_retriever.get_relevant_documents(state["question"])
     return {"context": retrieved_docs}
 
