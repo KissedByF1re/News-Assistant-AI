@@ -13,7 +13,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAI
 
 from langchain_core.messages import SystemMessage
 from langgraph.graph import END, MessagesState, StateGraph
@@ -29,7 +29,9 @@ if not os.environ.get("OPENAI_API_KEY"):
   os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
 
 global llm
-llm = ChatOpenAI(model="gpt-4o-mini", api_key=OPENAI_API_KEY)    
+llm = OpenAI(model="qwen2.5-14b-instruct", 
+             base_url="http://127.0.0.1:11434",
+             api_key="lm-studio")    
 
 # Define the metadata extraction function.
 def metadata_func(record: dict, metadata: dict) -> dict:
